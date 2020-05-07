@@ -23,14 +23,14 @@ export const Episodes: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className='container'>
       {episodes.map((episode: IEpisode) => (
-        <div key={episode.id}>
-          <h4>{episode.name} </h4>
+        <div className='card' key={episode.id}>
+          <h3>{episode.name} </h3>
+          <img src={episode.image && episode.image.medium} />
           <p>Season: {episode.season}</p>
           <p>Episode: {episode.number}</p>
           <p>Release date: {episode.airdate}</p>
-          <img src={episode.image && episode.image.medium} />
           <p>
             Overview:{' '}
             {episode.summary && episode.summary.replace(/<\/?[^>]+>/g, '')}

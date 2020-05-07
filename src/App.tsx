@@ -10,8 +10,10 @@ interface ITodo {
 const App: React.FC = () => {
   return (
     <GlobalProvider>
-      <h1>Rick and morty app</h1>
-      <Episodes />
+      <div className='container'>
+        <h1>Rick and morty app</h1>
+        <Episodes />
+      </div>
     </GlobalProvider>
   );
 };
