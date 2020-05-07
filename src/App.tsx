@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { GlobalProvider } from './context/GlobalContext';
+import { Episodes } from './components/Episodes';
 
 interface ITodo {
   text: string;
@@ -6,27 +8,11 @@ interface ITodo {
 }
 
 const App: React.FC = () => {
-  const [value, setValue] = useState<string>('');
-  const [todos, setTodos] = useState([]);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setValue('');
-  };
-
   return (
-    <>
-      <h1>To do list</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          required
-        />
-        <button type='submit'>add todo</button>
-      </form>
-    </>
+    <GlobalProvider>
+      <h1>Rick and morty app</h1>
+      <Episodes />
+    </GlobalProvider>
   );
 };
 
