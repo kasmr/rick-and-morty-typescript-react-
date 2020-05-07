@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface ITodo {
+  text: string;
+  complete: boolean;
 }
+
+const App: React.FC = () => {
+  const [value, setValue] = useState<string>('');
+  const [todos, setTodos] = useState([]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setValue('');
+  };
+
+  return (
+    <>
+      <h1>To do list</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type='text'
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          required
+        />
+        <button type='submit'>add todo</button>
+      </form>
+    </>
+  );
+};
 
 export default App;
