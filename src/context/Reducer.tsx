@@ -1,5 +1,9 @@
 import IState from './GlobalContext';
-import IActions from '../Interfaces';
+
+interface IActions {
+  type: string;
+  payload: any;
+}
 
 export default (state: IState, action: IActions) => {
   switch (action.type) {
@@ -7,6 +11,11 @@ export default (state: IState, action: IActions) => {
       return {
         ...state,
         episodes: action.payload,
+      };
+    case 'ADD_FAVORITE':
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
       };
     default:
       return state;

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
-interface IEpisode {
+export interface IEpisode {
   airdate: string;
   airstamp: string;
   airtime: string;
@@ -16,10 +16,11 @@ interface IEpisode {
 }
 
 export const Episodes: React.FC = () => {
-  const { episodes, fetchData }: any = useContext(GlobalContext);
+  const { episodes, fetchData, addFavorite }: any = useContext(GlobalContext);
 
   useEffect(() => {
     fetchData();
+    //eslint-disable-next-line
   }, []);
 
   return (
@@ -27,7 +28,7 @@ export const Episodes: React.FC = () => {
       {episodes.map((episode: IEpisode) => (
         <div className='card' key={episode.id}>
           <h3>{episode.name} </h3>
-          <img src={episode.image && episode.image.medium} />
+          <img src={episode.image && episode.image.medium} alt={episode.name} />
           <p>Season: {episode.season}</p>
           <p>Episode: {episode.number}</p>
           <p>Release date: {episode.airdate}</p>
@@ -35,6 +36,9 @@ export const Episodes: React.FC = () => {
             Overview:{' '}
             {episode.summary && episode.summary.replace(/<\/?[^>]+>/g, '')}
           </p>
+          <button type='button' onClick={() => addFavorite(episode)}>
+            Add to favorites
+          </button>
         </div>
       ))}
     </div>

@@ -1,10 +1,12 @@
 import React, { createContext, useReducer } from 'react';
 import Reducer from './Reducer';
+import { IEpisode } from '../components/Episodes';
 
 export default interface IState {
-  episodes: [];
-  favorites: [];
+  episodes: Array<IEpisode>;
+  favorites: Array<IEpisode>;
   fetchData?(): void;
+  addFavorite?(episode: IEpisode): void;
 }
 
 const initialState: IState = {
@@ -31,12 +33,18 @@ export const GlobalProvider = (props: any): JSX.Element => {
     dispatch({ type: 'FETCH_DATA', payload: episodes });
   };
 
+  const addFavorite = (episode: IEpisode) =>
+    dispatch({ type: 'ADD_FAVORITE', payload: episode });
+
+  console.log(state);
+
   return (
     <GlobalContext.Provider
       value={{
         episodes: state.episodes,
         favorites: state.favorites,
         fetchData,
+        addFavorite,
       }}
     >
       {props.children}
