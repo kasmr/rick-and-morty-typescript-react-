@@ -33,7 +33,7 @@ export const Episodes: React.FC = () => {
       <div className='container'>
         {episodes.map((episode: IEpisode) => (
           <div className='card' key={episode.id}>
-            <h3>{episode.name} </h3>
+            <h5>{episode.name} </h5>
             <img
               src={episode.image && episode.image.medium}
               alt={episode.name}
@@ -46,7 +46,7 @@ export const Episodes: React.FC = () => {
               {episode.summary &&
                 episode.summary
                   .replace(/<\/?[^>]+>/g, '')
-                  .slice(0, 100)
+                  .slice(0, 60)
                   .concat('...')}
             </p>
             <button type='button' onClick={() => addFavorite(episode)}>

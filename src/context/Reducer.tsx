@@ -1,5 +1,4 @@
 import IState from './GlobalContext';
-import { Episodes } from '../components/Episodes';
 
 interface IActions {
   type: string;

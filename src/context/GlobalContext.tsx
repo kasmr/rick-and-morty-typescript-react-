@@ -29,7 +29,6 @@ export const GlobalProvider = (props: any): JSX.Element => {
     const {
       _embedded: { episodes },
     } = await res.json();
-    console.log(episodes);
     dispatch({ type: 'FETCH_DATA', payload: episodes });
   };
 
