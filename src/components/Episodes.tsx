@@ -16,7 +16,9 @@ export interface IEpisode {
 }
 
 export const Episodes: React.FC = () => {
-  const { episodes, fetchData, addFavorite }: any = useContext(GlobalContext);
+  const { episodes, fetchData, addFavorite, favorites }: any = useContext(
+    GlobalContext
+  );
 
   useEffect(() => {
     fetchData();
@@ -24,23 +26,37 @@ export const Episodes: React.FC = () => {
   }, []);
 
   return (
-    <div className='container'>
-      {episodes.map((episode: IEpisode) => (
-        <div className='card' key={episode.id}>
-          <h3>{episode.name} </h3>
-          <img src={episode.image && episode.image.medium} alt={episode.name} />
-          <p>Season: {episode.season}</p>
-          <p>Episode: {episode.number}</p>
-          <p>Release date: {episode.airdate}</p>
-          <p>
-            Overview:{' '}
-            {episode.summary && episode.summary.replace(/<\/?[^>]+>/g, '')}
-          </p>
-          <button type='button' onClick={() => addFavorite(episode)}>
-            Add to favorites
-          </button>
-        </div>
-      ))}
-    </div>
+    <>
+      <p className='favorites'>
+        You have <span>{favorites.length}</span> Favorites
+      </p>
+      <div className='container'>
+        {episodes.map((episode: IEpisode) => (
+          <div className='card' key={episode.id}>
+            <h3>{episode.name} </h3>
+            <img
+              src={episode.image && episode.image.medium}
+              alt={episode.name}
+            />
+            <p>Season: {episode.season}</p>
+            <p>Episode: {episode.number}</p>
+            <p>Release date: {episode.airdate}</p>
+            <p>
+              Overview:{' '}
+              {episode.summary &&
+                episode.summary
+                  .replace(/<\/?[^>]+>/g, '')
+                  .slice(0, 100)
+                  .concat('...')}
+            </p>
+            <button type='button' onClick={() => addFavorite(episode)}>
+              {favorites.includes(episode)
+                ? 'Delete from favorites'
+                : 'Add to favorites'}
+            </button>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };

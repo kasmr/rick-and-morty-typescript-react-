@@ -1,6 +1,7 @@
 import React from 'react';
 import { GlobalProvider } from './context/GlobalContext';
 import { Episodes } from './components/Episodes';
+import { Navbar } from './components/Navbar';
 
 interface ITodo {
   text: string;
@@ -10,10 +11,8 @@ interface ITodo {
 const App: React.FC = () => {
   return (
     <GlobalProvider>
-      <div className='container'>
-        <h1>Rick and morty app</h1>
-        <Episodes />
-      </div>
+      <Navbar />
+      <Episodes />
     </GlobalProvider>
   );
 };

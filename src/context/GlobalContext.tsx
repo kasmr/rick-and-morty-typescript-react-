@@ -33,8 +33,14 @@ export const GlobalProvider = (props: any): JSX.Element => {
     dispatch({ type: 'FETCH_DATA', payload: episodes });
   };
 
-  const addFavorite = (episode: IEpisode) =>
-    dispatch({ type: 'ADD_FAVORITE', payload: episode });
+  const addFavorite = (episode: IEpisode) => {
+    const episodeInFav = state.favorites.includes(episode);
+    if (episodeInFav) {
+      dispatch({ type: 'DELETE_FAVORITE', payload: episode });
+    } else {
+      dispatch({ type: 'ADD_FAVORITE', payload: episode });
+    }
+  };
 
   console.log(state);
 
